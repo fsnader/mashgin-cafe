@@ -3,7 +3,8 @@ import {defineStore} from 'pinia'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    cart: {}
+    cart: {},
+    cartIsOpen: false,
   }),
   actions: {
     addItem(item) {
@@ -27,6 +28,12 @@ export const useAppStore = defineStore('app', {
         delete this.cart[item.id];
       }
     },
+    toggleCart() {
+      this.cartIsOpen = !this.cartIsOpen;
+    },
+    openCart() {
+      this.cartIsOpen = true;
+    }
   },
   getters: {
     cartArray() {

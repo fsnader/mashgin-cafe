@@ -1,8 +1,9 @@
 <template>
   <v-card>
     <v-img
+      @click="addToCart"
       :src="getImageUrl(item)"
-      class="align-end"
+      class="align-end menu-item-image"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
       height="300px"
       cover
@@ -51,11 +52,14 @@ export default {
     },
     addToCart() {
       this.store.addItem(this.item);
+      this.store.openCart();
     }
   }
 }
 </script>
 
 <style scoped>
-
+.menu-item-image {
+  cursor: pointer;
+}
 </style>

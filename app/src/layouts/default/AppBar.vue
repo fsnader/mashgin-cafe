@@ -16,20 +16,24 @@
       :items="items"
     ></v-list>
   </v-navigation-drawer>
-  <v-navigation-drawer v-model="cart" width="350" location="right" temporary>
+  <v-navigation-drawer v-model="store.cartIsOpen" width="350" location="right" temporary>
     <my-cart></my-cart>
   </v-navigation-drawer>
 </template>
 
 <script>
 import MyCart from "@/components/MyCart.vue";
+import {useAppStore} from "@/store/app";
 export default {
   components: {
     MyCart,
   },
+  setup() {
+    const store = useAppStore();
+    return { store };
+  },
   data: () => ({
     menu: false,
-    cart: false,
     group: null,
     items: [
       {
@@ -56,8 +60,7 @@ export default {
     },
     openCart() {
       this.menu = false;
-      this.cart = true;
-      // this.$router.push({ name: 'Checkout' })
+      this.store.toggleCart();
     }
   }
 }
