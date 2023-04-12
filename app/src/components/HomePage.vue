@@ -16,6 +16,7 @@
         <v-col cols="auto">
           <v-btn
             color="secondary"
+            @click="router.push({name: 'Menu'})"
             min-width="228"
             rel="noopener noreferrer"
             size="x-large"
@@ -37,4 +38,5 @@
 
 <script setup>
   //
+import router from "@/router";
 </script>
