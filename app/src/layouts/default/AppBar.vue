@@ -16,12 +16,20 @@
       :items="items"
     ></v-list>
   </v-navigation-drawer>
+  <v-navigation-drawer v-model="cart" width="350" location="right" temporary>
+    <my-cart></my-cart>
+  </v-navigation-drawer>
 </template>
 
 <script>
+import MyCart from "@/components/MyCart.vue";
 export default {
+  components: {
+    MyCart,
+  },
   data: () => ({
     menu: false,
+    cart: false,
     group: null,
     items: [
       {
@@ -48,7 +56,8 @@ export default {
     },
     openCart() {
       this.menu = false;
-      this.$router.push({ name: 'Checkout' })
+      this.cart = true;
+      // this.$router.push({ name: 'Checkout' })
     }
   }
 }

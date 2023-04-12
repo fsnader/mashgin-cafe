@@ -1,5 +1,22 @@
 <template>
-    <v-container fluid>
+  <v-container fluid>
+    <v-responsive class="d-flex align-center text-center fill-height">
+      <v-row>
+        <v-col>
+          <div class="py-4" />
+          <v-row>
+            <v-img
+              height="96"
+              src="@/assets/logo.png"
+            />
+          </v-row>
+          <v-row>
+            <v-col cols="12" >
+              <h3 class="text-lg-h3">Select your items</h3>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col
           v-for="item in items"
@@ -8,10 +25,11 @@
           :md="6"
           :sm="6"
         >
-         <menu-item :item="item"></menu-item>
+          <menu-item :item="item"></menu-item>
         </v-col>
       </v-row>
-    </v-container>
+    </v-responsive>
+  </v-container>
 </template>
 
 <script>
@@ -28,8 +46,6 @@ export default {
   async created() {
     this.items = await menuService.listItems();
   },
-  methods: {
-  }
 }
 
 </script>

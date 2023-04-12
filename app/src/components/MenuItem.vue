@@ -16,11 +16,10 @@
         size="large"
         start
       />
-      <h6 class="text-h6 font-weight-bold">{{item.price}}</h6>
+      <h6 class="text-h6 font-weight-bold">{{ getPrice(item) }}</h6>
       <v-spacer></v-spacer>
 
-
-      <v-btn size="large" color="surface-variant" variant="text">
+      <v-btn size="large" color="surface-variant" variant="text" @click="addToCart">
         <v-icon
           icon="mdi-plus"
           size="large"
@@ -41,6 +40,12 @@ export default {
   methods: {
     getImageUrl(item) {
       return menuService.getImageUrl(item.image_id);
+    },
+    getPrice(item) {
+      return item.price.toFixed(2);
+    },
+    addToCart() {
+      alert('Added to cart. id: ' + this.item.id);
     }
   }
 }
