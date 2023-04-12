@@ -6,13 +6,14 @@
       </v-list-item>
       <v-divider></v-divider>
       <v-list-item
-        v-for="item in items"
+        v-for="item in store.cartArray"
         :key="item.id"
         :title="getItemTitle(item)"
       >
         <template v-slot:append>
 
           <v-btn
+            @click="store.removeItem(item)"
             icon="mdi-minus"
             variant="text"
           ></v-btn>
@@ -20,6 +21,7 @@
             {{ item.quantity }}
           </v-chip>
           <v-btn
+            @click="store.addItem(item)"
             icon="mdi-plus"
             variant="text"
           ></v-btn>
@@ -29,7 +31,7 @@
       <v-list-item>
         <v-list-item-title>Total:</v-list-item-title>
         <template v-slot:append>
-          <v-chip class="total-chip chip">$ 100</v-chip>
+          <v-chip class="total-chip chip">{{formattedTotal}}</v-chip>
         </template>
       </v-list-item>
       <v-list-item>
@@ -41,31 +43,22 @@
 </template>
 
 <script>
+import {useAppStore} from "@/store/app";
+
 export default {
   name: "MyCart",
-  data: () => ({
-    items: [{
-      id: 1,
-      name: 'Croissant',
-      price: 10,
-      quantity: 1
-    },
-    {
-      id: 1,
-      name: 'Bread',
-      price: 10,
-      quantity: 1
-    },
-    {
-      id: 1,
-      name: 'Croissant',
-      price: 10,
-      quantity: 1
-    }]
-  }),
+  setup() {
+    const store = useAppStore();
+    return { store };
+  },
   methods: {
     getItemTitle(item) {
       return `${item.name} - $${item.price}`
+    }
+  },
+  computed: {
+    formattedTotal() {
+      return `$ ${this.store.total.toFixed(2)}`;
     }
   }
 }

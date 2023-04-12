@@ -33,10 +33,15 @@
 
 <script>
 import menuService from "@/services/menuService";
+import {useAppStore} from "@/store/app";
 
 export default {
   name: "MenuItem",
   props: ['item'],
+  setup() {
+    const store = useAppStore();
+    return { store };
+  },
   methods: {
     getImageUrl(item) {
       return menuService.getImageUrl(item.image_id);
@@ -45,7 +50,7 @@ export default {
       return item.price.toFixed(2);
     },
     addToCart() {
-      alert('Added to cart. id: ' + this.item.id);
+      this.store.addItem(this.item);
     }
   }
 }
