@@ -3,7 +3,16 @@
 A simple menu checkout app built in express + vue.js
 
 ## How to start on docker
-// TODO
+1. Clone the repo:
+```bash
+git clone https://github.com/fsnader/mashgin-cafe.git
+```
+
+2. Run docker-compose:
+```bash
+docker-compose up
+```
+3. The app wil be running on port 3000
 
 ## How to start locally
 1. Clone the repo:
