@@ -15,11 +15,6 @@ const routes = [
         name: 'Menu',
         component: () => import('@/views/Menu.vue'),
       },
-      {
-        path: '/my-cart',
-        name: 'MyCart',
-        component: () => import('@/views/MyCart.vue'),
-      },
     ],
   },
 ]
