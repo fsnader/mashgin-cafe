@@ -15,7 +15,7 @@ function getImageUrl(imageId) {
 }
 
 async function listCategories() {
-  const data = await fetch('${BASE_URL}/api/menu/items');
+  const data = await fetch(`${BASE_URL}/api/menu/items`);
   return await data.json();
 }
 

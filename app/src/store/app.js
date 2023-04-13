@@ -1,5 +1,6 @@
 // Utilities
 import {defineStore} from 'pinia'
+import ordersService from "@/services/ordersService";
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -35,8 +36,13 @@ export const useAppStore = defineStore('app', {
     openCart() {
       this.cartIsOpen = true;
     },
-    finishCheckout() {
-      alert('Checkout!');
+    clearCart() {
+      this.cart = {}
+    },
+    async finishCheckout(paymentInfo) {
+      const result = await ordersService.submitOrder(paymentInfo, this.cartArray);
+      alert(JSON.stringify(result));
+      this.clearCart();
       this.checkoutDialogIsOpen = false;
     }
   },

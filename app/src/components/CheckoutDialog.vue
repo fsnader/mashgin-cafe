@@ -18,7 +18,8 @@
                 md="6"
               >
                 <v-text-field
-                  label="First name*"
+                  label="Email*"
+                  v-model="paymentInfo.email"
                   required
                 ></v-text-field>
               </v-col>
@@ -28,44 +29,39 @@
                 md="6"
               >
                 <v-text-field
-                  label="Last name*"
-                  hint="example of persistent helper text"
-                  persistent-hint
+                  label="Name on card*"
+                  v-model="paymentInfo.name"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="Email*"
+                  label="Card number*"
+                  v-model="paymentInfo.cardNumber"
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col
+                cols="12"
+                sm="6"
+                md="6"
+              >
                 <v-text-field
-                  label="Password*"
+                  label="Expiry date*"
+                  v-model="paymentInfo.expiryDate"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                md="6"
+              >
+                <v-text-field
+                  label="Security number*"
                   type="password"
                   required
                 ></v-text-field>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
               </v-col>
             </v-row>
             <v-row>
@@ -78,7 +74,7 @@
                 <v-btn
                   color="primary"
                   block
-                  @click="store.finishCheckout"
+                  @click="finishCheckout"
                 >
                   Finish checkout
                 </v-btn>
@@ -111,8 +107,29 @@ export default {
     return { store };
   },
   data: () => ({
-    dialog: false,
+    paymentInfo: {
+      email: null,
+      name: null,
+      cardNumber: null,
+      expiryDate: null,
+    }
   }),
+  methods: {
+    clearForm() {
+      this.paymentInfo.email = null;
+      this.paymentInfo.name = null;
+      this.paymentInfo.cardNumber = null;
+      this.paymentInfo.expiryDate = null;
+    },
+    async finishCheckout() {
+      await this.store.finishCheckout(this.paymentInfo);
+      this.clearForm();
+    },
+    closeCheckoutDialog() {
+      this.clearForm();
+      this.store.checkoutDialogIsOpen = false;
+    }
+  }
 }
 </script>
 
