@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/order', async (req, res) => {
-  const { items, payment } = req.body;
+  const { items, paymentInfo } = req.body;
 
-  const { order, errors } = await submitOrder(items, payment);
+  const { order, errors } = await submitOrder(items, paymentInfo);
 
   if (errors) {
     return res.status(400).json({error: 'Invalid data'});

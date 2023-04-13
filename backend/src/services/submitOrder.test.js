@@ -1,26 +1,27 @@
 const submitOrder = require('./submitOrder');
-const paymentGateway = require("../infrastructure/gateways/paymentsGateway");
+const paymentInfoGateway = require("../infrastructure/gateways/paymentInfosGateway");
 const ordersRepository = require("../infrastructure/repositories/ordersRepository");
 
-jest.mock("../infrastructure/gateways/paymentsGateway");
+jest.mock("../infrastructure/gateways/paymentInfosGateway");
 jest.mock("../infrastructure/repositories/ordersRepository");
+jest.mock("./getTotalFromItems", () => () => 100);
 
 describe("submitOrder", () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it("returns an error when payment is not provided", async () => {
+  it("returns an error when paymentInfo is not provided", async () => {
 
     // Arrange
     const items = [{
       id: '123'
     }];
 
-    const payment = null;
+    const paymentInfo = null;
 
     // Act
-    const result = await submitOrder(items, payment);
+    const result = await submitOrder(items, paymentInfo);
 
     // Assert
     expect(result).toEqual({ order: null, errors: 'Invalid data' });
@@ -31,54 +32,54 @@ describe("submitOrder", () => {
 
     // Arrange
     const items = null;
-    const payment = {
+    const paymentInfo = {
       mocked: ''
     };
 
     // Act
-    const result = await submitOrder(items, payment);
+    const result = await submitOrder(items, paymentInfo);
 
     // Assert
     expect(result).toEqual({ order: null, errors: 'Invalid data' });
 
   });
 
-  it("returns an error when payment processing fails", async () => {
+  it("returns an error when paymentInfo processing fails", async () => {
 
     // Arrange
     const items = [{ id: 1 }, { id: 2 }];
-    const payment = { amount: 100 };
+    const paymentInfo = { amount: 100 };
 
-    paymentGateway.processPayment.mockResolvedValue(false);
+    paymentInfoGateway.processPayment.mockResolvedValue(false);
 
     // Act
-    const result = await submitOrder(items, payment);
+    const result = await submitOrder(items, paymentInfo);
 
     // Assert
     expect(result).toEqual({ order: null, errors: 'Payment error' });
-    expect(paymentGateway.processPayment).toHaveBeenCalledWith(payment);
+    expect(paymentInfoGateway.processPayment).toHaveBeenCalledWith(paymentInfo, 100);
 
   });
 
-  it("returns a success result when payment is processed and order is saved", async () => {
+  it("returns a success result when paymentInfo is processed and order is saved", async () => {
 
     // Arrange
     const items = [{ id: 1 }, { id: 2 }];
-    const payment = { amount: 100 };
+    const paymentInfo = { amount: 100 };
 
-    paymentGateway.processPayment.mockResolvedValue(true);
+    paymentInfoGateway.processPayment.mockResolvedValue(true);
 
     ordersRepository.saveOrder.mockImplementation(() => {});
 
     // Act
-    const result = await submitOrder(items, payment);
+    const result = await submitOrder(items, paymentInfo);
 
     // Assert
-    expect(paymentGateway.processPayment).toHaveBeenCalledWith(payment);
+    expect(paymentInfoGateway.processPayment).toHaveBeenCalledWith(paymentInfo, 100);
     expect(ordersRepository.saveOrder).toHaveBeenCalledWith(result.order);
     expect(result.errors).toBeNull();
     expect(result.order.items).toEqual(items);
-    expect(result.order.payment).toEqual(payment);
+    expect(result.order.paymentInfo).toEqual(paymentInfo);
 
   });
 });

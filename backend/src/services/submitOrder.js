@@ -1,3 +1,4 @@
+const getTotalFromItems = require("./getTotalFromItems");
 const paymentGateway = require("../infrastructure/gateways/paymentsGateway");
 const ordersRepository = require("../infrastructure/repositories/ordersRepository");
 
@@ -11,19 +12,22 @@ const successResult = (order) => ({
   errors: null,
 })
 
-module.exports = async function processOrder(items, payment) {
+module.exports = async function processOrder(items, paymentInfo) {
 
-  if (!items || !payment) {
+  if (!items || !paymentInfo) {
     return errorResult( 'Invalid data');
   }
+
+  const totalAmount = getTotalFromItems(items);
 
   const order = {
     id: new Date().getTime(),
     items,
-    payment,
+    totalAmount,
+    paymentInfo,
   };
 
-  const paymentSuccess = await paymentGateway.processPayment(payment);
+  const paymentSuccess = await paymentGateway.processPayment(paymentInfo, totalAmount);
 
   if (!paymentSuccess) {
     return errorResult('Payment error');
