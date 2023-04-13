@@ -9,6 +9,7 @@ async function submitOrder(paymentInfo, items) {
       items
     })
   });
+
   return await data.json();
 }
 
