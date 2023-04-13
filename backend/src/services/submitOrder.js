@@ -1,11 +1,20 @@
 const paymentGateway = require("../infrastructure/gateways/paymentsGateway");
 const ordersRepository = require("../infrastructure/repositories/ordersRepository");
 
+const errorResult = (errors) => ({
+  order: null,
+  errors
+})
+
+const successResult = (order) => ({
+  order,
+  errors: null,
+})
+
 module.exports = async function processOrder(items, payment) {
 
   if (!items || !payment) {
-    // Throw error
-    // return res.status(400).json({error: 'Invalid data'});
+    return errorResult( 'Invalid data');
   }
 
   const order = {
@@ -17,11 +26,10 @@ module.exports = async function processOrder(items, payment) {
   const paymentSuccess = await paymentGateway.processPayment(payment);
 
   if (!paymentSuccess) {
-    // Throw error
-    return null;
+    return errorResult('Payment error');
   }
 
   await ordersRepository.saveOrder(order);
 
-  return order;
+  return successResult(order);
 }
