@@ -105,3 +105,6 @@ dist
 
 # Webstorm
 .idea/
+
+# Data files
+backend/data/received-orders.json
