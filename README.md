@@ -22,7 +22,7 @@ cd mashgin-cafe
 docker-compose up
 ```
 3. The app wil be running on port 8080
-
+![img.png](docs/docker.png?raw=true)
 ## How to start locally
 1. Clone the repo and navigate to the repo folder:
 ```bash
