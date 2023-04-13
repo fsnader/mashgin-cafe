@@ -2,8 +2,13 @@
 
 A simple responsive menu checkout app built in express + vue.js
 
-![desktop](/docs/desktop-demo.gif?raw=true)
-![mobile](/docs/mobile-demo.gif?raw=true)
+<p align="center">
+  <img src="./docs/desktop-demo.gif?raw=true">
+</p>
+
+<p align="center">
+  <img src="./docs/mobile-demo.gif?raw=true">
+</p>
 
 ## How to start on docker
 1. Clone the repo:
