@@ -68,24 +68,32 @@
                 ></v-autocomplete>
               </v-col>
             </v-row>
+            <v-row>
+              <v-col>
+                <small>* indicates required field</small>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-btn
+                  color="primary"
+                  block
+                  @click="store.finishCheckout"
+                >
+                  Finish checkout
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-container>
-          <small>* indicates required field</small>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
           <v-btn
-            color="blue-darken-1"
             variant="text"
+            color="secondary"
+            block
             @click="store.checkoutDialogIsOpen = false;"
           >
             Close
-          </v-btn>
-          <v-btn
-            color="blue-darken-1"
-            variant="text"
-            @click="store.finishCheckout"
-          >
-            Save
           </v-btn>
         </v-card-actions>
       </v-card>
