@@ -9,7 +9,9 @@
     "postinstall": "npm-run-all install:*",
     "start:backend": "cd backend && npm start",
     "start:app": "cd app && npm run dev",
-    "start": "npm-run-all --parallel start:*"
+    "start": "npm-run-all --parallel start:*",
+    "test:backend": "cd backend && npm run tests",
+    "tests": "npm-run-all test:*"
   },
   "repository": {
     "type": "git",

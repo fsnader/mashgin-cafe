@@ -23,6 +23,7 @@ docker-compose up
 ```
 3. The app wil be running on port 8080
 ![img.png](docs/docker.png?raw=true)
+
 ## How to start locally
 1. Clone the repo and navigate to the repo folder:
 ```bash
@@ -41,6 +42,24 @@ npm start
 This will start the backend and the frontend in parallel:
 - Backend will be hosted on port 3000
 - Frontend will be exposed on http://127.0.0.1:8080/
+
+## How to run unit tests:
+
+1. Clone the repo and navigate to the repo folder:
+2. 
+```bash
+git clone https://github.com/fsnader/mashgin-cafe.git
+cd mashgin-cafe
+```
+
+2. Install dependencies.
+```bash
+npm install
+```
+3. Start the tests
+```bash
+npm run tests
+```
 
 ## Architecture
 <p align="center">
