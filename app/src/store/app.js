@@ -5,6 +5,7 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     cart: {},
     cartIsOpen: false,
+    checkoutDialogIsOpen: false,
   }),
   actions: {
     addItem(item) {
@@ -33,6 +34,10 @@ export const useAppStore = defineStore('app', {
     },
     openCart() {
       this.cartIsOpen = true;
+    },
+    finishCheckout() {
+      alert('Checkout!');
+      this.checkoutDialogIsOpen = false;
     }
   },
   getters: {

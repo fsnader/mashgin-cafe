@@ -46,7 +46,7 @@ export default {
       {
         title: 'Home',
         value: 'Home',
-        route: {name: 'Home'}
+        route: { name: 'Home' }
       },
       {
         title: 'Select your items',

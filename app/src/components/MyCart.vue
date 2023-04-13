@@ -36,18 +36,28 @@
         </template>
       </v-list-item>
       <v-list-item>
-          <v-btn color="primary" :disabled="store.total === 0" style="width: 100%">Checkout</v-btn>
+          <v-btn
+            color="primary"
+            :disabled="store.total === 0"
+            @click="store.checkoutDialogIsOpen = true"
+            style="width: 100%"
+          >
+            Checkout
+          </v-btn>
       </v-list-item>
     </v-list>
   </v-container>
-
+  <checkout-dialog></checkout-dialog>
 </template>
 
 <script>
 import {useAppStore} from "@/store/app";
-
+import CheckoutDialog from "@/components/CheckoutDialog.vue";
 export default {
   name: "MyCart",
+  components: {
+    CheckoutDialog,
+  },
   setup() {
     const store = useAppStore();
     return { store };
