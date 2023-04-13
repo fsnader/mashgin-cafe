@@ -1,6 +1,9 @@
 # Mashgin's Cafe
 
-A simple menu checkout app built in express + vue.js
+A simple responsive menu checkout app built in express + vue.js
+
+![desktop](/docs/desktop-demo.gif?raw=true)
+![mobile](/docs/mobile-demo.gif?raw=true)
 
 ## How to start on docker
 1. Clone the repo:
