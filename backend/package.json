@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --ignore 'lib/*.js' src/index.js",
+    "start": "nodemon --ignore 'data/*' src/index.js",
     "tests": "jest"
   },
   "dependencies": {
