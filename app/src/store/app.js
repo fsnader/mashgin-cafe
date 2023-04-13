@@ -1,6 +1,5 @@
-// Utilities
 import {defineStore} from 'pinia'
-import ordersService from "@/services/ordersService";
+import ordersService from '@/services/ordersService';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
