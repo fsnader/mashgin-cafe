@@ -3,9 +3,14 @@
     <v-dialog
       v-model="store.checkoutDialogIsOpen"
       persistent
-      width="1024"
+      width="900"
     >
-      <v-card>
+      <order-submitted-card
+        v-if="submitted"
+        @close="closeCheckoutDialog"
+        :order-number="orderNumber">
+      </order-submitted-card>
+      <v-card v-else>
         <v-card-title>
           <span class="text-h5">Let's finish your order!</span>
         </v-card-title>
@@ -104,20 +109,26 @@
 </template>
 
 <script>
-import { useAppStore } from "@/store/app";
+import {useAppStore} from "@/store/app";
+import OrderSubmittedCard from "@/components/OrderSubmittedCard.vue";
 
 const EMAIL_VALIDATION_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const CREDIT_CARD_REGEX = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/
 
 export default {
   name: "CheckoutDialog",
+  components: {
+    OrderSubmittedCard,
+  },
   setup() {
     const store = useAppStore();
-    return { store };
+    return {store};
   },
   data: () => ({
     valid: false,
     loading: false,
+    submitted: false,
+    orderNumber: null,
     paymentInfo: {
       email: null,
       name: null,
@@ -141,13 +152,15 @@ export default {
       this.paymentInfo.expiryDate = null;
     },
     async finishCheckout() {
-      if(!this.valid) {
+      if (!this.valid) {
         return;
       }
 
       this.loading = true;
       try {
-        await this.store.finishCheckout(this.paymentInfo);
+        const order = await this.store.finishCheckout(this.paymentInfo);
+        this.orderNumber = order.id;
+        this.submitted = true;
         this.clearForm();
       } catch (error) {
         console.error(error);
@@ -156,8 +169,10 @@ export default {
       }
     },
     closeCheckoutDialog() {
-      this.clearForm();
       this.store.checkoutDialogIsOpen = false;
+      this.orderNumber = null;
+      this.submitted = false;
+      this.clearForm();
     }
   }
 }

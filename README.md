@@ -12,7 +12,7 @@ git clone https://github.com/fsnader/mashgin-cafe.git
 ```bash
 docker-compose up
 ```
-3. The app wil be running on port 3000
+3. The app wil be running on port 8080
 
 ## How to start locally
 1. Clone the repo:
@@ -30,7 +30,7 @@ npm start
 ```
 This will start the backend and the frontend in parallel:
 - Backend will be hosted on port 3000
-- Frontend will be exposed on port 8080
+- Frontend will be exposed on http://127.0.0.1:8080/
 
 ## Architecture
 // TODO

@@ -41,9 +41,8 @@ export const useAppStore = defineStore('app', {
     },
     async finishCheckout(paymentInfo) {
       const result = await ordersService.submitOrder(paymentInfo, this.cartArray);
-      alert(JSON.stringify(result));
       this.clearCart();
-      this.checkoutDialogIsOpen = false;
+      return result;
     }
   },
   getters: {
