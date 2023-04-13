@@ -12,9 +12,16 @@
     v-model="menu"
     temporary
   >
-    <v-list
-      :items="items"
-    ></v-list>
+    <v-list>
+      <v-list-item
+        v-for="(item, i) in items"
+        :key="i"
+        :title="item.title"
+        @click="$router.push(item.route)"
+        active-color="primary"
+      >
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
   <v-navigation-drawer v-model="store.cartIsOpen" width="350" location="right" temporary>
     <my-cart></my-cart>
@@ -39,18 +46,11 @@ export default {
       {
         title: 'Home',
         value: 'Home',
+        route: {name: 'Home'}
       },
       {
-        title: 'Bar',
-        value: 'bar',
-      },
-      {
-        title: 'Fizz',
-        value: 'fizz',
-      },
-      {
-        title: 'Buzz',
-        value: 'buzz',
+        title: 'Select your items',
+        route: { name: 'Menu' }
       },
     ],
   }),

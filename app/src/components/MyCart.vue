@@ -5,13 +5,14 @@
         <h3>Your selected items</h3>
       </v-list-item>
       <v-divider></v-divider>
+      <v-list-item v-if="store.cartArray.length === 0" title="Your cart is empty">
+      </v-list-item>
       <v-list-item
         v-for="item in store.cartArray"
         :key="item.id"
         :title="getItemTitle(item)"
       >
         <template v-slot:append>
-
           <v-btn
             @click="store.removeItem(item)"
             icon="mdi-minus"
@@ -35,7 +36,7 @@
         </template>
       </v-list-item>
       <v-list-item>
-          <v-btn color="primary" style="width: 100%">Checkout</v-btn>
+          <v-btn color="primary" :disabled="store.total === 0" style="width: 100%">Checkout</v-btn>
       </v-list-item>
     </v-list>
   </v-container>
