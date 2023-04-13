@@ -1,57 +1,22 @@
-# essentials
+# Mashgin's Cafe
 
-## Project setup
-
+## How to start locally
+1. Clone the repo:
+```bash
+git clone https://github.com/fsnader/mashgin-cafe.git
 ```
-# yarn
-yarn
-
-# npm
+2. Install dependencies.
+```bash
 npm install
-
-# pnpm
-pnpm install
 ```
 
-### Compiles and hot-reloads for development
-
+3. Start the project
+```bash
+npm start
 ```
-# yarn
-yarn dev
+This will start the backend and the frontend in parallel:
+- Backend will be hosted on port 3000
+- Frontend will be exposed on port 8080
 
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-```
-
-### Compiles and minifies for production
-
-```
-# yarn
-yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-```
-
-### Lints and fixes files
-
-```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
+## How to start on docker
+// TODO
