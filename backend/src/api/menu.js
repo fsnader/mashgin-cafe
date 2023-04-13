@@ -12,7 +12,6 @@ const getCategoryId = (req) => {
 router.get('/menu/items', async (req, res) => {
   const categoryId = getCategoryId(req);
 
-  console.log(categoryId);
   const items = await menuRepository.getItems(categoryId);
 
   res.json(items);

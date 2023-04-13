@@ -1,0 +1,24 @@
+{
+  "name": "mashgin-cafe",
+  "version": "1.0.0",
+  "description": "Monorepo for the mashgin-cafe project",
+  "main": "index.js",
+  "scripts": {
+    "install:app": "cd app && npm install",
+    "install:backend": "cd backend && npm install",
+    "postinstall": "npm-run-all install:*",
+    "start:backend": "cd backend && npm start",
+    "start:app": "cd app && npm run dev",
+    "start": "npm-run-all --parallel start:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mashgin-cafe.git"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
