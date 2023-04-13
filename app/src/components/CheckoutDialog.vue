@@ -128,7 +128,6 @@ export default {
       required: value => !!value || 'You must enter a value.',
       email: value => EMAIL_VALIDATION_REGEX.test(value) || 'Invalid e-mail.',
       creditCard: value => CREDIT_CARD_REGEX.test(value) || 'Invalid credit card number.',
-
     },
     required: [
       value => value ? true : 'You must enter a value.',
