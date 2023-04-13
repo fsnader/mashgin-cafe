@@ -1,8 +1,8 @@
 const submitOrder = require('./submitOrder');
-const paymentInfoGateway = require("../infrastructure/gateways/paymentInfosGateway");
+const paymentsGateway = require("../infrastructure/gateways/paymentsGateway");
 const ordersRepository = require("../infrastructure/repositories/ordersRepository");
 
-jest.mock("../infrastructure/gateways/paymentInfosGateway");
+jest.mock("../infrastructure/gateways/paymentsGateway");
 jest.mock("../infrastructure/repositories/ordersRepository");
 jest.mock("./getTotalFromItems", () => () => 100);
 
@@ -50,14 +50,14 @@ describe("submitOrder", () => {
     const items = [{ id: 1 }, { id: 2 }];
     const paymentInfo = { amount: 100 };
 
-    paymentInfoGateway.processPayment.mockResolvedValue(false);
+    paymentsGateway.processPayment.mockResolvedValue(false);
 
     // Act
     const result = await submitOrder(items, paymentInfo);
 
     // Assert
     expect(result).toEqual({ order: null, errors: 'Payment error' });
-    expect(paymentInfoGateway.processPayment).toHaveBeenCalledWith(paymentInfo, 100);
+    expect(paymentsGateway.processPayment).toHaveBeenCalledWith(paymentInfo, 100);
 
   });
 
@@ -67,7 +67,7 @@ describe("submitOrder", () => {
     const items = [{ id: 1 }, { id: 2 }];
     const paymentInfo = { amount: 100 };
 
-    paymentInfoGateway.processPayment.mockResolvedValue(true);
+    paymentsGateway.processPayment.mockResolvedValue(true);
 
     ordersRepository.saveOrder.mockImplementation(() => {});
 
@@ -75,7 +75,7 @@ describe("submitOrder", () => {
     const result = await submitOrder(items, paymentInfo);
 
     // Assert
-    expect(paymentInfoGateway.processPayment).toHaveBeenCalledWith(paymentInfo, 100);
+    expect(paymentsGateway.processPayment).toHaveBeenCalledWith(paymentInfo, 100);
     expect(ordersRepository.saveOrder).toHaveBeenCalledWith(result.order);
     expect(result.errors).toBeNull();
     expect(result.order.items).toEqual(items);
