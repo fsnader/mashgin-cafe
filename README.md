@@ -1,5 +1,10 @@
 # Mashgin's Cafe
 
+A simple menu checkout app built in express + vue.js
+
+## How to start on docker
+// TODO
+
 ## How to start locally
 1. Clone the repo:
 ```bash
@@ -18,5 +23,5 @@ This will start the backend and the frontend in parallel:
 - Backend will be hosted on port 3000
 - Frontend will be exposed on port 8080
 
-## How to start on docker
+## Architecture
 // TODO
