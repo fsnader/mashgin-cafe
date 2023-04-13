@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const menuRepository = require("../infrastructure/repositories/menuRepository");
+const menuRepository = require('../infrastructure/repositories/menuRepository');
 
 const getCategoryId = (req) => {
   const { categoryId } = req.query;

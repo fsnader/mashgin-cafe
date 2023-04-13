@@ -1,6 +1,6 @@
-const getTotalFromItems = require("./getTotalFromItems");
-describe("getTotalFromItems", () => {
-  test("should return the total cost of all items", () => {
+const getTotalFromItems = require('./getTotalFromItems');
+describe('getTotalFromItems', () => {
+  test('should return the total cost of all items', () => {
     // Arrange
     const items = [
       { price: 10, quantity: 2 },
@@ -16,7 +16,7 @@ describe("getTotalFromItems", () => {
     expect(result).toEqual(expectedTotal);
   });
 
-  test("should return 0 when given an empty array", () => {
+  test('should return 0 when given an empty array', () => {
     // Arrange
     const items = [];
     const expectedTotal = 0;

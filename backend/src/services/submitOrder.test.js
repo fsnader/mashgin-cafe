@@ -1,17 +1,17 @@
 const submitOrder = require('./submitOrder');
-const paymentsGateway = require("../infrastructure/gateways/paymentsGateway");
-const ordersRepository = require("../infrastructure/repositories/ordersRepository");
+const paymentsGateway = require('../infrastructure/gateways/paymentsGateway');
+const ordersRepository = require('../infrastructure/repositories/ordersRepository');
 
-jest.mock("../infrastructure/gateways/paymentsGateway");
-jest.mock("../infrastructure/repositories/ordersRepository");
-jest.mock("./getTotalFromItems", () => () => 100);
+jest.mock('../infrastructure/gateways/paymentsGateway');
+jest.mock('../infrastructure/repositories/ordersRepository');
+jest.mock('./getTotalFromItems', () => () => 100);
 
-describe("submitOrder", () => {
+describe('submitOrder', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it("returns an error when paymentInfo is not provided", async () => {
+  it('returns an error when paymentInfo is not provided', async () => {
 
     // Arrange
     const items = [{
@@ -28,7 +28,7 @@ describe("submitOrder", () => {
 
   });
 
-  it("returns an error when items are not provided", async () => {
+  it('returns an error when items are not provided', async () => {
 
     // Arrange
     const items = null;
@@ -44,7 +44,7 @@ describe("submitOrder", () => {
 
   });
 
-  it("returns an error when paymentInfo processing fails", async () => {
+  it('returns an error when paymentInfo processing fails', async () => {
 
     // Arrange
     const items = [{ id: 1 }, { id: 2 }];
@@ -61,7 +61,7 @@ describe("submitOrder", () => {
 
   });
 
-  it("returns a success result when paymentInfo is processed and order is saved", async () => {
+  it('returns a success result when paymentInfo is processed and order is saved', async () => {
 
     // Arrange
     const items = [{ id: 1 }, { id: 2 }];

@@ -1,6 +1,6 @@
-const getTotalFromItems = require("./getTotalFromItems");
-const paymentGateway = require("../infrastructure/gateways/paymentsGateway");
-const ordersRepository = require("../infrastructure/repositories/ordersRepository");
+const getTotalFromItems = require('./getTotalFromItems');
+const paymentGateway = require('../infrastructure/gateways/paymentsGateway');
+const ordersRepository = require('../infrastructure/repositories/ordersRepository');
 
 const errorResult = (errors) => ({
   order: null,
