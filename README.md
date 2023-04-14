@@ -46,7 +46,6 @@ This will start the backend and the frontend in parallel:
 ## How to run unit tests:
 
 1. Clone the repo and navigate to the repo folder:
-2. 
 ```bash
 git clone https://github.com/fsnader/mashgin-cafe.git
 cd mashgin-cafe
